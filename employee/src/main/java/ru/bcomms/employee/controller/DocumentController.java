@@ -49,4 +49,10 @@ public class DocumentController {
         service.deleteById(uuid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping(value = "/all")
+    public ResponseEntity<HttpStatus> deleteAll() {
+        service.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
