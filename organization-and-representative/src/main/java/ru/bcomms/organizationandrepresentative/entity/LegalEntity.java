@@ -32,7 +32,7 @@ public class LegalEntity implements Serializable {
      * Обязательный элемент.
      * Формат: ххххххххххххх 13 цифр
      */
-    @Column(nullable = false)
+    @Column(nullable = false, length = 13)
     private String ogrn;
     /**
      * Идентификационный номер налогоплательщика.
@@ -40,7 +40,7 @@ public class LegalEntity implements Serializable {
      * хххххххххх(хх)
      * 10 обязательных и 2 необязательных
      */
-    @Column(nullable = false)
+    @Column(nullable = false, length = 12)
     private String inn;
     /**
      * Адрес (Почтовый).

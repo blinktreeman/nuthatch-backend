@@ -1,5 +1,6 @@
 package ru.bcomms.organizationandrepresentative.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bcomms.organizationandrepresentative.entity.LegalEntity;
 import ru.bcomms.organizationandrepresentative.repository.LegalEntityRepository;
@@ -11,12 +12,13 @@ import java.util.UUID;
 public class LegalEntityService {
     private final LegalEntityRepository repository;
 
+    @Autowired
     public LegalEntityService(LegalEntityRepository repository) {
         this.repository = repository;
     }
 
-    public LegalEntity save(LegalEntity legalEntity) {
-        return repository.save(legalEntity);
+    public LegalEntity save(LegalEntity entity) {
+        return repository.save(entity);
     }
 
     public Optional<LegalEntity> findById(UUID uuid) {
@@ -27,8 +29,8 @@ public class LegalEntityService {
         return repository.findAll();
     }
 
-    public LegalEntity update(LegalEntity legalEntity) {
-        return repository.save(legalEntity);
+    public LegalEntity update(LegalEntity entity) {
+        return repository.save(entity);
     }
 
     public void deleteById(UUID uuid) {
