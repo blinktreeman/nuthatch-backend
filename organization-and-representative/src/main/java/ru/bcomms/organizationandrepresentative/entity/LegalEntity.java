@@ -53,6 +53,11 @@ public class LegalEntity implements Serializable {
      * Минимум 1 символ
      */
     private String phone;
+    /**
+     * Информация о саморегулируемой организации
+     */
+    @ManyToOne
+    private Sro sro;
 
     public LegalEntity(String name, String ogrn, String inn) {
         this.name = name;

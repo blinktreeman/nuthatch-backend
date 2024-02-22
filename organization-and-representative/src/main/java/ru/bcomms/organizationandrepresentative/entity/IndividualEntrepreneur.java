@@ -43,4 +43,9 @@ public class IndividualEntrepreneur implements Serializable {
      */
     @Column(nullable = false, length = 12)
     private String inn;
+    /**
+     * Информация о саморегулируемой организации
+     */
+    @ManyToOne
+    private Sro sro;
 }
