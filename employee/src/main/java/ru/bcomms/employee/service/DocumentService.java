@@ -39,4 +39,8 @@ public class DocumentService {
     public void deleteById(UUID uuid) {
         repository.deleteById(uuid);
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }

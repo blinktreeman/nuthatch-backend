@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="649d1291-2c3d-4dd0-ac99-f40bc2819f79" />
   </component>
@@ -10,7 +11,16 @@
         <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
         <option value="$PROJECT_DIR$/employee/pom.xml" />
+        <option value="$PROJECT_DIR$/incominginspection/pom.xml" />
+        <option value="$PROJECT_DIR$/organisation-and-representative/pom.xml" />
+        <option value="$PROJECT_DIR$/address/pom.xml" />
+        <option value="$PROJECT_DIR$/organization-and-representative/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/incominginspection/pom.xml" />
+      </set>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
