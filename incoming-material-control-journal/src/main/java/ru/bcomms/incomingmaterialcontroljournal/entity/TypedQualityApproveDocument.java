@@ -18,12 +18,35 @@ public class TypedQualityApproveDocument implements Serializable {
     @Id
     @GeneratedValue
     private UUID uuid;
-    @ManyToMany
-    private Set<DocRequisites> materialAmountQualityDocument = new HashSet<>();
-    @ManyToMany
-    private Set<DocRequisites> parametersComplianceDocument = new HashSet<>();
-    @ManyToMany
-    private Set<DocRequisites> additionalParametersComplianceDocument = new HashSet<>();
-    @ManyToMany
-    private Set<DocRequisites> additionalQualityDocument = new HashSet<>();
+    // document-service DocRequisites UUIDs
+    /**
+     * Документы, подтверждающие качество конкретного количества материала
+     * (партии, штуки, комплекта, серии и т.п.).
+     * Необязательный элемент
+     */
+    @ElementCollection(targetClass = UUID.class)
+    private Set<UUID> materialAmountQualityDocument = new HashSet<>();
+    /**
+     * Документы, подтверждающие соответствие конкретной номенклатуры материала
+     * (изделия), конкретного производителя требуемым параметрам.
+     * Обязательный элемент
+     */
+    @ElementCollection(targetClass = UUID.class)
+    private Set<UUID> parametersComplianceDocument = new HashSet<>();
+    /**
+     * Документы, подтверждающие соответствие конкретной номенклатуры материала (изделия),
+     * конкретного производителя дополнительным показателям качества (пожаробезопасность,
+     * санитарная, радиационная безопасность и т.д.).
+     * Необязательный элемент
+     */
+    @ElementCollection(targetClass = UUID.class)
+    private Set<UUID> additionalParametersComplianceDocument = new HashSet<>();
+    /**
+     * Документ о результатах дополнительного подтверждения качества конкретного количества
+     * материала (партии, штуки, комплекта, серии и т.п.), предназначенного к использованию
+     * на конкретном строительном Объекте, путём лабраторных исследований, испытаний и т.п.
+     * Необязательный элемент
+     */
+    @ElementCollection(targetClass = UUID.class)
+    private Set<UUID> additionalQualityDocument = new HashSet<>();
 }

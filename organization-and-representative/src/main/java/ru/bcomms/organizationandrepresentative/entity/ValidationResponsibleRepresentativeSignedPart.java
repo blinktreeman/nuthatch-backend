@@ -22,9 +22,9 @@ public class ValidationResponsibleRepresentativeSignedPart implements Serializab
     /**
      * Распорядительный документ, подтверждающий полномочия.
      * Обязательный элемент
+     * document-service DocRequisites
      */
-    @ManyToOne(fetch = FetchType.EAGER)
-    private DocRequisites administrativeDocument;
+    private UUID administrativeDocument;
     /**
      * Id подписываемой части информации о представителе, ответственном за верификацию.
      * Обязательный элемент
