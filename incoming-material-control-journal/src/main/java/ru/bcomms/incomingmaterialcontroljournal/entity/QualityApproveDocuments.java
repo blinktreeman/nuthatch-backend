@@ -1,9 +1,6 @@
 package ru.bcomms.incomingmaterialcontroljournal.entity;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -27,9 +24,11 @@ public class QualityApproveDocuments {
     /**
      * Список нетипизированных ДПК
      */
+    @ManyToMany
     private Set<UntypedQualityApproveDocument> untypedQualityApproveDocuments = new HashSet<>();
     /**
      * Комплект типизированных ДПК
      */
+    @ManyToMany
     private Set<TypedQualityApproveDocument> typedQualityApproveDocuments = new HashSet<>();
 }

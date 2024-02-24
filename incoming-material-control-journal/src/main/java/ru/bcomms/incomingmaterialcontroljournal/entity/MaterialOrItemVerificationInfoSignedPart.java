@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -14,9 +13,35 @@ import java.util.UUID;
  * Подписываемая часть сведений о верификации закупленной продукции
  */
 @Data
-@Entity
+@Embeddable
+@AttributeOverrides({
+        @AttributeOverride(name = "materialOrItemVerificationJournalRecordId",
+                column = @Column(name = "material_verification_info_signed_part_material_or_item_verification_journal_record_id")),
+        @AttributeOverride(name = "deliveryDate",
+                column = @Column(name = "material_verification_info_signed_part_delivery_date")),
+        @AttributeOverride(name = "transportInfo",
+                column = @Column(name = "material_verification_info_signed_part_transport_info")),
+        @AttributeOverride(name = "supplier",
+                column = @Column(name = "material_verification_info_signed_part_supplier")),
+        @AttributeOverride(name = "materialOrItemName",
+                column = @Column(name = "material_verification_info_signed_part_material_or_item_name")),
+        @AttributeOverride(name = "qualityApproveDocuments",
+                column = @Column(name = "material_verification_info_signed_part_quality_approve_documents")),
+        @AttributeOverride(name = "packagingType",
+                column = @Column(name = "material_verification_info_signed_part_packaging_type")),
+        @AttributeOverride(name = "materialOrItemAdditionalInfo",
+                column = @Column(name = "material_verification_info_signed_part_material_or_item_additional_info")),
+        @AttributeOverride(name = "samplingPlace",
+                column = @Column(name = "material_verification_info_signed_part_sampling_place")),
+        @AttributeOverride(name = "samplingDate",
+                column = @Column(name = "material_verification_info_signed_part_sampling_date")),
+        @AttributeOverride(name = "qualityConclusion",
+                column = @Column(name = "material_verification_info_signed_part_quality_conclusion")),
+        @AttributeOverride(name = "id",
+                column = @Column(name = "material_verification_info_signed_part_id"))
+})
 @Table(name = "material_verification_info_signed_part")
-public class MaterialOrItemVerificationInfoSignedPart implements Serializable {
+public class MaterialOrItemVerificationInfoSignedPart {
     /**
      * Идентификатор записи журнала.
      * Обязательный элемент
@@ -25,8 +50,6 @@ public class MaterialOrItemVerificationInfoSignedPart implements Serializable {
      * Наложенные ограничения
      * [0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}
      */
-    @Id
-    @GeneratedValue
     private UUID materialOrItemVerificationJournalRecordId;
     /**
      * Дата поступления.

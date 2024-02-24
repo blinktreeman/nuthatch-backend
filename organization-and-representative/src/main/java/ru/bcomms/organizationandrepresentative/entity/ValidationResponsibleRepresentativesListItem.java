@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
-import ru.bcomms.organizationandrepresentative.common.Signature;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -27,10 +26,4 @@ public class ValidationResponsibleRepresentativesListItem implements Serializabl
      */
     @OneToOne
     private ValidationResponsibleRepresentativeSignedPart validationResponsibleRepresentativeSignedPart;
-    /**
-     * Подпись застройщика (технического заказчика).
-     * Обязательный элемент (TODO: Signature)
-     */
-    @OneToOne
-    private Signature signature;
 }
