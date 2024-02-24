@@ -20,6 +20,5 @@ public class SignatureFilesListItem implements Serializable {
      * Файл подписи документа. Обязательный элемент
      */
     @Embedded
-    @Column(nullable = false)
     private InternalAttachment signatureFilesListItem;
 }

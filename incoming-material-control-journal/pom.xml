@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.bcomms</groupId>
-    <artifactId>organization-and-representative</artifactId>
+    <artifactId>incoming-material-control-journal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>organization-and-representative</name>
-    <description>organization-and-representative</description>
+    <name>incoming-material-control-journal</name>
+    <description>incoming-material-control-journal</description>
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>

@@ -20,7 +20,6 @@ public class IndividualEntrepreneur implements Serializable {
      * ФИО. Обязательный элемент
      */
     @Embedded
-    @Column(nullable = false)
     private FullNameGroup fullNameGroup;
     /**
      * Адрес (Почтовый). Обязательный элемент
