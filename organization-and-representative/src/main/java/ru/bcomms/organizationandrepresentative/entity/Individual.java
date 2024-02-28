@@ -20,7 +20,6 @@ public class Individual implements Serializable {
      * ФИО. Обязательный элемент
      */
     @Embedded
-    @Column(nullable = false)
     private FullNameGroup fullNameGroup;
     /**
      * Адрес. Обязательный элемент

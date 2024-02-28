@@ -4,6 +4,8 @@ import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 /**
@@ -21,16 +23,22 @@ public class FullNameGroup {
     /**
      * Фамилия. Обязательный элемент
      */
+    @NotNull
+    @Size(min = 1, message = "Фамилия. Обязательный элемент")
     @Column(nullable = false)
     private String lastName;
     /**
      * Имя. Обязательный элемент
      */
+    @NotNull
+    @Size(min = 1, message = "Имя. Обязательный элемент")
     @Column(nullable = false)
     private String firstName;
     /**
      * Отчество. Обязательный элемент
      */
+    @NotNull
+    @Size(min = 1, message = "Отчество. Обязательный элемент")
     @Column(nullable = false)
     private String middleName;
 }
