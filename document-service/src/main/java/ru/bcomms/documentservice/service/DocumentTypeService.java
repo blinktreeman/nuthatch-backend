@@ -1,33 +1,33 @@
 package ru.bcomms.documentservice.service;
 
 import org.springframework.stereotype.Service;
-import ru.bcomms.documentservice.entity.DocRequisites;
-import ru.bcomms.documentservice.repository.DocRequisitesRepository;
+import ru.bcomms.documentservice.entity.DocumentType;
+import ru.bcomms.documentservice.repository.DocumentTypeRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class DocRequisitesService {
-    private final DocRequisitesRepository repository;
+public class DocumentTypeService {
+    private final DocumentTypeRepository repository;
 
-    public DocRequisitesService(DocRequisitesRepository repository) {
+    public DocumentTypeService(DocumentTypeRepository repository) {
         this.repository = repository;
     }
 
-    public DocRequisites save(DocRequisites entity) {
+    public DocumentType save(DocumentType entity) {
         return repository.save(entity);
     }
 
-    public Optional<DocRequisites> findById(UUID uuid) {
+    public Optional<DocumentType> findById(UUID uuid) {
         return repository.findById(uuid);
     }
 
-    public Iterable<DocRequisites> findAll() {
+    public Iterable<DocumentType> findAll() {
         return repository.findAll();
     }
 
-    public DocRequisites update(DocRequisites entity) {
+    public DocumentType update(DocumentType entity) {
         return repository.save(entity);
     }
 

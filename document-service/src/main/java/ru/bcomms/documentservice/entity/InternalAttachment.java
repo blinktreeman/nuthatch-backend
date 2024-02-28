@@ -29,24 +29,24 @@ public class InternalAttachment {
      * Наложенные ограничения
      * [0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}
      */
-    private UUID id;
+    protected UUID id;
     /**
      * Имя файла.
      * Обязательный элемент
      * Минимум 1 символ
      */
     @Column(nullable = false)
-    private String name;
+    protected String name;
     /**
      * Описание.
      * Необязательный элемент
      * Минимум 1 символ
      */
-    private String description;
+    protected String description;
     /**
      * Контрольная сумма файла.
      * Необязательный элемент
      * Минимум 1 символ
      */
-    private String checksum;
+    protected String checksum;
 }

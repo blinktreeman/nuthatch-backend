@@ -68,8 +68,6 @@ public class MaterialOrItemVerificationInfoSignedPart {
     /**
      * Поставщик. Обязательный элемент
      */
-    @NotNull
-    @Column(nullable = false)
     @ManyToOne
     private Supplier supplier;
     /**

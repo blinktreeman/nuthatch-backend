@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,33 +18,29 @@ public class TypedQualityApproveDocument implements Serializable {
     private UUID uuid;
     // document-service DocRequisites UUIDs
     /**
-     * Документы, подтверждающие качество конкретного количества материала
+     * Документ, подтверждающий качество конкретного количества материала
      * (партии, штуки, комплекта, серии и т.п.).
      * Необязательный элемент
      */
-    @ElementCollection(targetClass = UUID.class)
-    private Set<UUID> materialAmountQualityDocument = new HashSet<>();
+    private UUID materialAmountQualityDocument;
     /**
-     * Документы, подтверждающие соответствие конкретной номенклатуры материала
+     * Документ, подтверждающий соответствие конкретной номенклатуры материала
      * (изделия), конкретного производителя требуемым параметрам.
      * Обязательный элемент
      */
-    @ElementCollection(targetClass = UUID.class)
-    private Set<UUID> parametersComplianceDocument = new HashSet<>();
+    private UUID parametersComplianceDocument;
     /**
-     * Документы, подтверждающие соответствие конкретной номенклатуры материала (изделия),
+     * Документ, подтверждающий соответствие конкретной номенклатуры материала (изделия),
      * конкретного производителя дополнительным показателям качества (пожаробезопасность,
      * санитарная, радиационная безопасность и т.д.).
      * Необязательный элемент
      */
-    @ElementCollection(targetClass = UUID.class)
-    private Set<UUID> additionalParametersComplianceDocument = new HashSet<>();
+    private UUID additionalParametersComplianceDocument;
     /**
      * Документ о результатах дополнительного подтверждения качества конкретного количества
      * материала (партии, штуки, комплекта, серии и т.п.), предназначенного к использованию
      * на конкретном строительном Объекте, путём лабраторных исследований, испытаний и т.п.
      * Необязательный элемент
      */
-    @ElementCollection(targetClass = UUID.class)
-    private Set<UUID> additionalQualityDocument = new HashSet<>();
+    private UUID additionalQualityDocument;
 }
