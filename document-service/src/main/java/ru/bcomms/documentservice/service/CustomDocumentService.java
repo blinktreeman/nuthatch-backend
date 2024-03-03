@@ -6,16 +6,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.bcomms.documentservice.dto.CustomDocumentDto;
 import ru.bcomms.documentservice.entity.CustomDocument;
+import ru.bcomms.documentservice.entity.InternalAttachment;
 import ru.bcomms.documentservice.repository.CustomDocumentRepository;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.zip.CRC32;
+import java.util.zip.Checksum;
 
 @Service
 public class CustomDocumentService {
@@ -33,40 +35,36 @@ public class CustomDocumentService {
         this.s3Client = s3Client;
     }
 
-//    public String upload(MultipartFile file) throws IOException {
-//        String keyName = file.getOriginalFilename();
-//        System.out.println(s3Client.listBuckets());
-//        s3Client
-//                .putObject(PutObjectRequest
-//                                .builder()
-//                                .bucket(BUCKET)
-//                                .key(keyName)
-//                                .build(),
-//                        RequestBody.fromBytes(file.getBytes()));
-//        GetUrlRequest request = GetUrlRequest.builder().bucket(BUCKET).key(keyName).build();
-//        String fileLink = s3Client.utilities().getUrl(request).toExternalForm();
-//        return fileLink;
-//    }
-
-    public CustomDocument save(CustomDocumentDto entity) throws IOException {
-        MultipartFile file = entity.getAttachment().getDocumentFile();
+    public InternalAttachment upload(MultipartFile file) throws IOException {
         String keyName = file.getOriginalFilename();
+
+        byte[] data = file.getBytes();
+        // File CRC32 checksum
+        Checksum crc32 = new CRC32();
+        crc32.update(data, 0, data.length);
+        String checksum = String.valueOf(crc32.getValue());
+        // Upload file
         s3Client
                 .putObject(PutObjectRequest
                                 .builder()
                                 .bucket(BUCKET)
                                 .key(keyName)
+                                .checksumCRC32(checksum)
                                 .build(),
-                        RequestBody.fromBytes(file.getBytes()));
-        GetUrlRequest request = GetUrlRequest
-                .builder()
-                .bucket(BUCKET)
-                .key(keyName)
-                .build();
-        String fileLink = s3Client.utilities().getUrl(request).toExternalForm();
-        CustomDocument document = modelMapper.map(entity, CustomDocument.class);
-        document.getAttachment().setName(fileLink);
-        return repository.save(document);
+                        RequestBody.fromBytes(data));
+        // Get uploaded file attr
+        GetUrlRequest request = GetUrlRequest.builder().bucket(BUCKET).key(keyName).build();
+
+        InternalAttachment attachment = new InternalAttachment();
+        attachment.setName(s3Client.utilities().getUrl(request).toExternalForm());
+        attachment.setId(UUID.randomUUID());
+        attachment.setChecksum(checksum);
+
+        return attachment;
+    }
+
+    public CustomDocument save(CustomDocumentDto entity) {
+        return repository.save(modelMapper.map(entity, CustomDocument.class));
     }
 
     public Optional<CustomDocument> findById(UUID uuid) {
@@ -88,4 +86,5 @@ public class CustomDocumentService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
 }

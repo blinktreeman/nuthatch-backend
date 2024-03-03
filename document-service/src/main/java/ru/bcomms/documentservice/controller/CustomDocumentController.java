@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.bcomms.documentservice.dto.CustomDocumentDto;
 import ru.bcomms.documentservice.entity.CustomDocument;
+import ru.bcomms.documentservice.entity.InternalAttachment;
 import ru.bcomms.documentservice.service.CustomDocumentService;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -23,10 +23,11 @@ public class CustomDocumentController {
         this.service = service;
     }
 
-//    @PostMapping(value = "/upload")
-//    public ResponseEntity<String> upload(@RequestBody MultipartFile file) throws IOException {
-//        return new ResponseEntity<>(service.upload(file), HttpStatus.OK);
-//    }
+    @PostMapping(value = "/upload")
+    public ResponseEntity<InternalAttachment> upload(@RequestParam(name = "file") MultipartFile file)
+            throws IOException {
+        return new ResponseEntity<>(service.upload(file), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<CustomDocument> save(@RequestBody CustomDocumentDto entity) throws IOException {

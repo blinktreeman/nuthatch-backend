@@ -1,15 +1,15 @@
 package ru.bcomms.documentservice.dto;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class CustomDocumentDto {
-    protected DocumentType typeOfDocument;
+    protected DocumentType documentType;
     protected List<String> fieldValues = new ArrayList<>();
     protected Date date;
     protected Date expirationDate;
@@ -17,6 +17,7 @@ public class CustomDocumentDto {
 
     @Data
     public class DocumentType {
+        protected UUID uuid;
         protected String typeOfDocument;
         protected String description;
         protected List<String> documentFields = new ArrayList<>();
@@ -24,7 +25,6 @@ public class CustomDocumentDto {
 
     @Data
     public class InternalAttachment {
-        protected MultipartFile documentFile;
         protected String name;
         protected String description;
         protected String checksum;
