@@ -19,21 +19,21 @@ import java.util.UUID;
 public class LegalEntity implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
+    protected UUID uuid;
     /**
      * Наименование юр. лица.
      * Обязательный элемент.
      * Минимум 1 символ
      */
     @Column(nullable = false)
-    private String name;
+    protected String name;
     /**
      * Основной государственный регистрационный номер.
      * Обязательный элемент.
      * Формат: ххххххххххххх 13 цифр
      */
     @Column(nullable = false, length = 13)
-    private String ogrn;
+    protected String ogrn;
     /**
      * Идентификационный номер налогоплательщика.
      * Обязательный элемент.
@@ -41,23 +41,23 @@ public class LegalEntity implements Serializable {
      * 10 обязательных и 2 необязательных
      */
     @Column(nullable = false, length = 12)
-    private String inn;
+    protected String inn;
     /**
      * Адрес (Почтовый).
      * Обязательный элемент
      */
-    private UUID address;
+    protected UUID address;
     /**
      * Телефон/Факс.
      * Необязательный элемент.
      * Минимум 1 символ
      */
-    private String phone;
+    protected String phone;
     /**
      * Информация о саморегулируемой организации
      */
     @ManyToOne
-    private Sro sro;
+    protected Sro sro;
 
     public LegalEntity(String name, String ogrn, String inn) {
         this.name = name;

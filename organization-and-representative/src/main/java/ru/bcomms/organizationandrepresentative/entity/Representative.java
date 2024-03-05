@@ -1,9 +1,6 @@
 package ru.bcomms.organizationandrepresentative.entity;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,16 +15,26 @@ import java.util.UUID;
 public class Representative implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
+    protected UUID uuid;
     /**
      * Фамилия, Имя, Отчество. Обязательный элемент
      */
     @Embedded
-    private FullNameGroup fullNameGroup;
+    protected FullNameGroup fullNameGroup;
+    /**
+     * Наименование юр. лица.
+     * Обязательный элемент
+     */
+    @ManyToOne
+    protected LegalEntity legalEntity;
     /**
      * Должность.
      * Обязательный элемент.
      * Минимум 1 символ
      */
-    private String position;
+    protected String position;
+    /**
+     * Номер специалиста в реестре Нострой
+     */
+    protected String nostroyNumber;
 }

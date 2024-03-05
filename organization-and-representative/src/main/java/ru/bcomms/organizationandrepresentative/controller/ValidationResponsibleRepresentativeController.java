@@ -4,42 +4,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bcomms.organizationandrepresentative.entity.OrganisationAndRepresentative;
-import ru.bcomms.organizationandrepresentative.service.OrganisationAndRepresentativeService;
+import ru.bcomms.organizationandrepresentative.entity.ValidationResponsibleRepresentative;
+import ru.bcomms.organizationandrepresentative.service.ValidationResponsibleRepresentativeService;
 
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/api/v1/organization-and-representative")
-public class OrganisationAndRepresentativeController {
-    private final OrganisationAndRepresentativeService service;
+@RequestMapping(value = "/api/v1/validation-responsible-representative")
+public class ValidationResponsibleRepresentativeController {
+    private final ValidationResponsibleRepresentativeService service;
 
     @Autowired
-    public OrganisationAndRepresentativeController(OrganisationAndRepresentativeService service) {
+    public ValidationResponsibleRepresentativeController(
+            ValidationResponsibleRepresentativeService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<OrganisationAndRepresentative> save(@RequestBody
-                                                                  OrganisationAndRepresentative entity) {
+    public ResponseEntity<ValidationResponsibleRepresentative> save(
+            @RequestBody ValidationResponsibleRepresentative entity) {
         return new ResponseEntity<>(service.save(entity), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<OrganisationAndRepresentative> findById(@RequestParam UUID uuid) {
+    public ResponseEntity<ValidationResponsibleRepresentative> findById(@RequestParam UUID uuid) {
         return service.findById(uuid)
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<Iterable<OrganisationAndRepresentative>> findAll() {
+    public ResponseEntity<Iterable<ValidationResponsibleRepresentative>> findAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<OrganisationAndRepresentative> update(@RequestBody
-                                                                    OrganisationAndRepresentative entity) {
+    public ResponseEntity<ValidationResponsibleRepresentative> update(
+            @RequestBody ValidationResponsibleRepresentative entity) {
         return new ResponseEntity<>(service.update(entity), HttpStatus.OK);
     }
 

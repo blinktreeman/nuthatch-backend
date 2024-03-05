@@ -12,19 +12,7 @@ import java.util.UUID;
  */
 @Data
 @Entity
-public class ValidationResponsibleRepresentativeSignedPart implements Serializable {
-    /**
-     * Информация о представителе (ФИО, должность, ID сотрудника).
-     * Обязательный элемент
-     */
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Representative representative;
-    /**
-     * Распорядительный документ, подтверждающий полномочия.
-     * Обязательный элемент
-     * document-service DocRequisites
-     */
-    private UUID administrativeDocument;
+public class ValidationResponsibleRepresentative implements Serializable {
     /**
      * Id подписываемой части информации о представителе, ответственном за верификацию.
      * Обязательный элемент
@@ -35,5 +23,18 @@ public class ValidationResponsibleRepresentativeSignedPart implements Serializab
      */
     @Id
     @GeneratedValue
-    private UUID id;
+    protected UUID uuid;
+    /**
+     * Информация о представителе (ФИО, должность, ID сотрудника).
+     * Обязательный элемент
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    protected Representative representative;
+    /**
+     * Распорядительный документ, подтверждающий полномочия.
+     * Обязательный элемент
+     * document-service CustomDocument
+     */
+    protected UUID administrativeDocument;
+
 }

@@ -3,6 +3,8 @@ package ru.bcomms.organizationandrepresentative.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 /**
  * Описание комплексного типа: PassportDetails.
  * Паспортные данные
@@ -19,11 +21,11 @@ public class PassportDetails {
     /**
      * Паспортные данные гражданина РФ
      */
-    @Embedded
-    private PassportDetailsRu passportDetailsRussianFederation;
+    // данные document-service
+    protected UUID passportDetailsRussianFederation;
     /**
      * Документ подтверждающий личность иностранного гражданина
      */
-    @Embedded
-    private DocumentDetailsForeign documentDetailsForeign;
+    // данные document-service
+    protected UUID documentDetailsForeign;
 }
