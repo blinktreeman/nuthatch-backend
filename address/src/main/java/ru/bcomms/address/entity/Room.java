@@ -1,25 +1,19 @@
 package ru.bcomms.address.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 /**
  * Описание комплексного типа: Room
  * Тип и номер помещения
  */
 @Data
-@NoArgsConstructor
-@Entity
-public class Room implements AbstractEntity {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+@Embeddable
+@AttributeOverrides({
+        @AttributeOverride(name = "room_type", column = @Column(name = "room_room_type")),
+        @AttributeOverride(name = "room_number", column = @Column(name = "room_room_number"))
+})
+public class Room {
     /**
      * Тип помещения
      * Обязательный элемент
@@ -35,8 +29,4 @@ public class Room implements AbstractEntity {
     @Column(nullable = false)
     private String roomNumber;
 
-    public Room(String roomType, String roomNumber) {
-        this.roomType = roomType;
-        this.roomNumber = roomNumber;
-    }
 }

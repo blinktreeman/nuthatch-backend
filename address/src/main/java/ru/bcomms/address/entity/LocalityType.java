@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 @Data
 @Entity
-public class Locality implements AbstractEntity {
+public class LocalityType implements AbstractEntity {
     @Id
     @GeneratedValue
     private UUID uuid;
@@ -22,11 +22,4 @@ public class Locality implements AbstractEntity {
      */
     @Column(nullable = false)
     private String localityType;
-    /**
-     * Наименование населенного пункта
-     * Обязательный элемент
-     * Минимум 1 символ
-     */
-    @Column(nullable = false)
-    private String localityName;
 }

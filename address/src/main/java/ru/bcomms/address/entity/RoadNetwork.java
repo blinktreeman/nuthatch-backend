@@ -3,19 +3,19 @@ package ru.bcomms.address.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.UUID;
-
 /**
  * Описание комплексного типа: RoadNetwork
  * Наименование элемента улично-дорожной сети
  */
 @Data
-@Entity
-@Table(name = "road_network")
-public class RoadNetwork implements AbstractEntity {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+@Embeddable
+@AttributeOverrides({
+        @AttributeOverride(name = "road_network_element",
+                column = @Column(name = "road_network_road_network_element")),
+        @AttributeOverride(name = "road_network_object",
+                column = @Column(name = "road_network_road_network_object"))
+})
+public class RoadNetwork {
     /**
      * Наименование элемента улично-дорожной сети
      * Обязательный элемент

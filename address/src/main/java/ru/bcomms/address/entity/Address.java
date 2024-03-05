@@ -20,15 +20,15 @@ public class Address implements AbstractEntity {
      * Обязательный элемент
      * Минимум 1 символ
      */
-    @Column(nullable = false)
-    private String country;
+    @ManyToOne
+    private Country country;
     /**
      * Субъект Российской Федерации
      * Обязательный элемент
      * Минимум 1 символ
      */
-    @Column(nullable = false)
-    private String entityOfFederation;
+    @ManyToOne
+    private EntityOfFederation entityOfFederation;
     /**
      * Муниципальный район, муниципальный округ, городской округ
      * или внутригородская территория (для объектов федерального
@@ -53,18 +53,19 @@ public class Address implements AbstractEntity {
      * Необязательный элемент
      */
     @ManyToOne
-    private Locality locality;
+    private LocalityType localityType;
+    private String localityName;
     /**
      * Наименование элемента планировочной структуры
      * Необязательный элемент
      */
-    @ManyToOne
+    @Embedded
     private PlanningStructure planningStructure;
     /**
      * Наименование элемента улично-дорожной сети
      * Необязательный элемент
      */
-    @ManyToOne
+    @Embedded
     private RoadNetwork roadNetwork;
     /**
      * Вид объекта адресации
@@ -84,14 +85,14 @@ public class Address implements AbstractEntity {
      * адресации "Здание", "Сооружение", "Помещение", "Машино-место")
      * Необязательный элемент
      */
-    @ManyToOne
+    @Embedded
     private Building building;
     /**
      * Тип и номер помещения (Заполняется для вида объекта адресации
      * "Помещение")
      * Необязательный элемент
      */
-    @ManyToOne
+    @Embedded
     private Room room;
     /**
      * Номер машино-места (Заполняется для вида объекта адресации
