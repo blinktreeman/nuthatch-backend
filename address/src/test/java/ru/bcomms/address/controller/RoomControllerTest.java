@@ -20,9 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class RoomControllerTest {
     private final Room TEST_ROOM =
-            new Room("hall", "1");
+            new Room();
     private final Room UPDATED_ROOM =
-            new Room("bathroom", "2");
+            new Room();
 
     @Autowired
     ObjectMapper objectMapper;

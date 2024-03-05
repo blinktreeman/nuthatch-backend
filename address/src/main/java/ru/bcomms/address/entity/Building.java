@@ -1,23 +1,19 @@
 package ru.bcomms.address.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.UUID;
 
 /**
  * Описание комплексного типа: Building
  * Тип и номер здания (сооружения)
  */
 @Data
-@Entity
-public class Building implements AbstractEntity {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+@Embeddable
+@AttributeOverrides({
+        @AttributeOverride(name = "building_type", column = @Column(name = "building_building_type")),
+        @AttributeOverride(name = "building_number", column = @Column(name = "building_building_number"))
+})
+public class Building {
     /**
      * Тип здания (сооружения)
      * Обязательный элемент
