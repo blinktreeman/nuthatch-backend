@@ -3,7 +3,6 @@ package ru.bcomms.organizationandrepresentative.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -26,7 +25,9 @@ public class LegalEntity implements Serializable {
      * Минимум 1 символ
      */
     @Column(nullable = false)
-    protected String name;
+    protected String fullName;
+    @Column(nullable = false)
+    protected String shortName;
     /**
      * Основной государственный регистрационный номер.
      * Обязательный элемент.
@@ -60,7 +61,7 @@ public class LegalEntity implements Serializable {
     protected Sro sro;
 
     public LegalEntity(String name, String ogrn, String inn) {
-        this.name = name;
+        this.fullName = name;
         this.ogrn = ogrn;
         this.inn = inn;
     }

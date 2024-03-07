@@ -12,3 +12,8 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+dadata:
+  client:
+    base-url: "https://cleaner.dadata.ru/api/v1/clean/address"
+    token: "f1f221b267fd3d3766f57a61df24b9b0e8840131"
+    secret-key: "c2c5e6470bfb318ba0b40ad33777effee2f6abd6"
