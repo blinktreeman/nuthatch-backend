@@ -47,7 +47,8 @@ public class LegalEntity implements Serializable {
      * Адрес (Почтовый).
      * Обязательный элемент
      */
-    protected UUID address;
+    protected UUID addressUuid;
+    protected String address;
     /**
      * Телефон/Факс.
      * Необязательный элемент.
