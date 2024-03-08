@@ -25,6 +25,7 @@ public class IndividualEntrepreneur implements Serializable {
      * Адрес (Почтовый). Обязательный элемент
      */
     protected UUID addressUuid;
+    protected String address;
     /**
      * Основной государственный регистрационный номер индивидуального предпринимателя.
      * Обязательный элемент.

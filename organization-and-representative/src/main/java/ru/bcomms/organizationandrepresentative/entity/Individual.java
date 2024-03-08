@@ -25,6 +25,7 @@ public class Individual implements Serializable {
      * Адрес. Обязательный элемент
      */
     protected UUID addressUuid;
+    protected String address;
 
     protected boolean isRussianFederationCitizen = true;
 
