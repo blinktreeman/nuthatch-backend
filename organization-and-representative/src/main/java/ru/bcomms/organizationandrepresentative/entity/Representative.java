@@ -23,10 +23,14 @@ public class Representative implements Serializable {
     protected FullNameGroup fullNameGroup;
     /**
      * Наименование юр. лица.
-     * Обязательный элемент
      */
     @ManyToOne
     protected LegalEntity legalEntity;
+    /**
+     * Наименование ИП
+     */
+    @ManyToOne
+    protected IndividualEntrepreneur individualEntrepreneur;
     /**
      * Должность.
      * Обязательный элемент.

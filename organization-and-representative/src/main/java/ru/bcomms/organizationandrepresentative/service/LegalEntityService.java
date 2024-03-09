@@ -11,33 +11,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class LegalEntityService {
+public class LegalEntityService extends CommonService {
     private final LegalEntityRepository repository;
-    private final WebClient webClient;
 
-    private final String ADDRESS_SERVICE_URI = "http://address-service/api/v1/address";
-
+    @Autowired
     public LegalEntityService(LegalEntityRepository repository, WebClient webClient) {
+        super(webClient);
         this.repository = repository;
-        this.webClient = webClient;
-    }
-
-    /**
-     * Стандартизирует входящий адрес ЮЛ с сохранением в БД
-     * @param address Адрес для стандартизации
-     * @return Dto: UUID записи в БД, String - стандартизированный адрес
-     */
-    private AddressResponseDto standardizeAddress(String address) {
-        return webClient
-                .post()
-                .uri(ADDRESS_SERVICE_URI + "/save-standardized?address=" + address)
-                .retrieve()
-                .bodyToMono(AddressResponseDto.class)
-                .block();
     }
 
     public LegalEntity save(LegalEntity entity) {
-        AddressResponseDto responseDto = standardizeAddress(entity.getAddress());
+        AddressResponseDto responseDto = this.standardizeAddress(entity.getAddress());
         entity.setAddressUuid(responseDto.getUuid());
         entity.setAddress(responseDto.getStandardizedAddress());
         return repository.save(entity);
