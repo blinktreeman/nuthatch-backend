@@ -25,6 +25,7 @@ public class AddressController {
         try {
             return new ResponseEntity<>(this.service.saveStandardizedAddress(address), HttpStatus.OK);
         } catch (Exception e) {
+            System.err.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

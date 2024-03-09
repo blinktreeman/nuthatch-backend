@@ -34,7 +34,7 @@ public class AddressService {
     }
 
     // Стандартизируем адрес из строки
-    private Address standardizeAddress(String address) throws IOException, InterruptedException {
+    private Optional<Address> standardizeAddress(String address) throws IOException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL))
@@ -47,25 +47,39 @@ public class AddressService {
                 .build();
 
         HttpClient client = HttpClient.newHttpClient();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        String responseBody = response.body();
+        String responseBody = "";
+        // Запрос стандартизации адреса, при недоступности сервиса - пустой ответ
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            responseBody = response.body();
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+
         // Удалить квадратные скобки из ответа
         responseBody = responseBody.substring(1, responseBody.length() - 1);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        return objectMapper.readValue(responseBody, Address.class);
+        return Optional.of(objectMapper.readValue(responseBody, Address.class));
     }
 
     // CRUD methods
     public StandardizedAddressResponseDto saveStandardizedAddress(String address)
-            throws IOException, InterruptedException {
-        Address standardizedAddress = save(this.standardizeAddress(address));
-        return new StandardizedAddressResponseDto(
-                standardizedAddress.getUuid(),
-                standardizedAddress.toString()
-        );
+            throws IOException {
+        return this.standardizeAddress(address)
+                .map(value -> {
+                    this.save(value);
+                    return new StandardizedAddressResponseDto (
+                            value.getUuid(),
+                            value.toString()
+                    );
+                })
+                .orElseGet(() -> new StandardizedAddressResponseDto(
+                        null,
+                        address
+                ));
     }
 
     public Address save(Address entity) {
