@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.bcomms.organizationandrepresentative.dto.DocumentResponseDto;
 import ru.bcomms.organizationandrepresentative.entity.Representative;
 import ru.bcomms.organizationandrepresentative.service.RepresentativeService;
 
@@ -36,6 +37,11 @@ public class RepresentativeController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/all-documents")
+    public ResponseEntity<Iterable<DocumentResponseDto>> findAllDocuments() {
+        return new ResponseEntity<>(this.service.findAllDocuments(), HttpStatus.OK);
+    }
+
     @PutMapping
     public ResponseEntity<Representative> update(@RequestBody Representative entity) {
         return new ResponseEntity<>(service.update(entity), HttpStatus.OK);
@@ -52,4 +58,5 @@ public class RepresentativeController {
         service.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

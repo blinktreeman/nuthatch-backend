@@ -1,14 +1,13 @@
 package ru.bcomms.organizationandrepresentative.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 import java.util.Date;
 
-/**
- * Описание комплексного типа: DocumentDetailsForeignCitizen.
- * Документ подтверждающий личность иностранного гражданина
- */
 @Data
 @Embeddable
 @AttributeOverrides({
@@ -18,31 +17,8 @@ import java.util.Date;
         @AttributeOverride(name = "dateIssue", column = @Column(name = "document_details_foreign_date_issue"))
 })
 public class DocumentDetailsForeign {
-    /**
-     * Наименование документа.
-     * Обязательный элемент.
-     * Минимум 1 символ
-     */
-    @Column(nullable = false)
-    private String docName;
-    /**
-     * Серия.
-     * Необязательный элемент.
-     * Минимум 1 символ
-     */
-    private String series;
-    /**
-     * Номер.
-     * Обязательный элемент.
-     * Минимум 1 символ
-     */
-    @Column(nullable = false)
-    private String number;
-    /**
-     * Дата выдачи.
-     * Обязательный элемент
-     * Дата в формате <ГГГГ-ММ-ДД> (год-месяц-день)
-     */
-    @Column(nullable = false)
-    private Date dateIssue;
+    protected String docName;
+    protected String series;
+    protected String number;
+    protected Date dateIssue;
 }

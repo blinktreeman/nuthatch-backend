@@ -1,6 +1,10 @@
 package ru.bcomms.organizationandrepresentative.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import ru.bcomms.organizationandrepresentative.dto.DocumentResponseDto;
 import ru.bcomms.organizationandrepresentative.entity.Representative;
 import ru.bcomms.organizationandrepresentative.repository.RepresentativeRepository;
 
@@ -10,11 +14,29 @@ import java.util.UUID;
 @Service
 public class RepresentativeService {
     private final RepresentativeRepository repository;
+    private final WebClient webClient;
 
-    public RepresentativeService(RepresentativeRepository repository) {
+    @Value("${organization.service.document-service-uri}")
+    private String DOCUMENT_SERVICE_URI;
+
+    @Autowired
+    public RepresentativeService(RepresentativeRepository repository,
+                                 WebClient webClient) {
         this.repository = repository;
+        this.webClient = webClient;
     }
 
+    public Iterable<DocumentResponseDto> findAllDocuments() {
+        return webClient
+                .get()
+                .uri(DOCUMENT_SERVICE_URI + "/all")
+                .retrieve()
+                .bodyToFlux(DocumentResponseDto.class)
+                .collectList()
+                .block();
+    }
+
+    // CRUD methods
     public Representative save(Representative entity) {
         return repository.save(entity);
     }

@@ -26,19 +26,19 @@ public class FullNameGroup {
     @NotNull
     @Size(min = 1, message = "Фамилия. Обязательный элемент")
     @Column(nullable = false)
-    private String lastName;
+    protected String lastName;
     /**
      * Имя. Обязательный элемент
      */
     @NotNull
     @Size(min = 1, message = "Имя. Обязательный элемент")
     @Column(nullable = false)
-    private String firstName;
+    protected String firstName;
     /**
      * Отчество. Обязательный элемент
      */
     @NotNull
     @Size(min = 1, message = "Отчество. Обязательный элемент")
     @Column(nullable = false)
-    private String middleName;
+    protected String middleName;
 }

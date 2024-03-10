@@ -3,7 +3,6 @@ package ru.bcomms.organizationandrepresentative.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -19,21 +18,23 @@ import java.util.UUID;
 public class LegalEntity implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
+    protected UUID uuid;
     /**
      * Наименование юр. лица.
      * Обязательный элемент.
      * Минимум 1 символ
      */
     @Column(nullable = false)
-    private String name;
+    protected String fullName;
+    @Column(nullable = false)
+    protected String shortName;
     /**
      * Основной государственный регистрационный номер.
      * Обязательный элемент.
      * Формат: ххххххххххххх 13 цифр
      */
     @Column(nullable = false, length = 13)
-    private String ogrn;
+    protected String ogrn;
     /**
      * Идентификационный номер налогоплательщика.
      * Обязательный элемент.
@@ -41,26 +42,27 @@ public class LegalEntity implements Serializable {
      * 10 обязательных и 2 необязательных
      */
     @Column(nullable = false, length = 12)
-    private String inn;
+    protected String inn;
     /**
      * Адрес (Почтовый).
      * Обязательный элемент
      */
-    private UUID address;
+    protected UUID addressUuid;
+    protected String address;
     /**
      * Телефон/Факс.
      * Необязательный элемент.
      * Минимум 1 символ
      */
-    private String phone;
+    protected String phone;
     /**
      * Информация о саморегулируемой организации
      */
     @ManyToOne
-    private Sro sro;
+    protected Sro sro;
 
     public LegalEntity(String name, String ogrn, String inn) {
-        this.name = name;
+        this.fullName = name;
         this.ogrn = ogrn;
         this.inn = inn;
     }

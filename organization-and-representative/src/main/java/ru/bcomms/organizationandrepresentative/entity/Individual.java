@@ -15,19 +15,20 @@ import java.util.UUID;
 public class Individual implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
+    protected UUID uuid;
     /**
      * ФИО. Обязательный элемент
      */
     @Embedded
-    private FullNameGroup fullNameGroup;
+    protected FullNameGroup fullNameGroup;
     /**
      * Адрес. Обязательный элемент
      */
-    private UUID addressUuid;
+    protected UUID addressUuid;
+    protected String address;
 
-    private boolean isRussianFederationCitizen = true;
+    protected boolean isRussianFederationCitizen = true;
 
     @Embedded
-    private PassportDetails passportDetails;
+    protected PassportDetails passportDetails;
 }

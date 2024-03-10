@@ -15,16 +15,17 @@ import java.util.UUID;
 public class IndividualEntrepreneur implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
+    protected UUID uuid;
     /**
      * ФИО. Обязательный элемент
      */
     @Embedded
-    private FullNameGroup fullNameGroup;
+    protected FullNameGroup fullNameGroup;
     /**
      * Адрес (Почтовый). Обязательный элемент
      */
-    private UUID addressUuid;
+    protected UUID addressUuid;
+    protected String address;
     /**
      * Основной государственный регистрационный номер индивидуального предпринимателя.
      * Обязательный элемент.
@@ -33,7 +34,7 @@ public class IndividualEntrepreneur implements Serializable {
      * 13 цифр
      */
     @Column(nullable = false, length = 13)
-    private String ogrnip;
+    protected String ogrnip;
     /**
      * ИНН.
      * Обязательный элемент
@@ -41,10 +42,10 @@ public class IndividualEntrepreneur implements Serializable {
      * 12 цифр
      */
     @Column(nullable = false, length = 12)
-    private String inn;
+    protected String inn;
     /**
      * Информация о саморегулируемой организации
      */
     @ManyToOne
-    private Sro sro;
+    protected Sro sro;
 }

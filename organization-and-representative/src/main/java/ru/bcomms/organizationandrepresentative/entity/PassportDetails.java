@@ -19,11 +19,13 @@ public class PassportDetails {
     /**
      * Паспортные данные гражданина РФ
      */
+    // данные document-service
     @Embedded
-    private PassportDetailsRu passportDetailsRussianFederation;
+    protected PassportDetailsRussianFederation passportDetailsRussianFederation;
     /**
      * Документ подтверждающий личность иностранного гражданина
      */
+    // данные document-service
     @Embedded
-    private DocumentDetailsForeign documentDetailsForeign;
+    protected DocumentDetailsForeign documentDetailsForeign;
 }

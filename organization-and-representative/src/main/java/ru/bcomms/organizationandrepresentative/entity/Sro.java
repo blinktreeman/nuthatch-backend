@@ -18,13 +18,13 @@ import java.util.UUID;
 public class Sro implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
+    protected UUID uuid;
     /**
      * Наименование.
      * Обязательный элемент
      */
     @Column(nullable = false)
-    private String name;
+    protected String name;
     /**
      * Идентификационный номер налогоплательщика.
      * Обязательный элемент
@@ -32,7 +32,7 @@ public class Sro implements Serializable {
      * 10 обязательных и 2 необязательных
      */
     @Column(nullable = false, length = 12)
-    private String inn;
+    protected String inn;
     /**
      * Основной государственный регистрационный номер.
      * Обязательный элемент
@@ -41,5 +41,5 @@ public class Sro implements Serializable {
      * 13 цифр
      */
     @Column(nullable = false, length = 13)
-    private String ogrn;
+    protected String ogrn;
 }
