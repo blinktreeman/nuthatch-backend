@@ -14,6 +14,6 @@ import lombok.Data;
         @AttributeOverride(name = "value", column = @Column(name = "weight_value"))
 })
 public class Weight {
-    private String unit;
-    private Double value;
+    protected String unit;
+    protected Double value;
 }

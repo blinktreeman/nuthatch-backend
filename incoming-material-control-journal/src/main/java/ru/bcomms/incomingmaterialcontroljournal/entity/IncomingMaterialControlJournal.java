@@ -17,23 +17,17 @@ import java.util.UUID;
 public class IncomingMaterialControlJournal implements Serializable {
     @Id
     @GeneratedValue
-    private UUID uuid;
-    /**
-     * Информация об UUID и редакции документа, UUID объекта капитального строительства, версии схемы.
-     * Обязательный элемент
-     */
-    @Embedded
-    private BaseDocument baseDocument;
+    protected UUID uuid;
     /**
      * Титульный лист. Обязательный элемент
      */
-    @ManyToOne
-    private IncomingMaterialControlJournalTitle incomingMaterialControlJournalTitle;
+    @Embedded
+    protected IncomingMaterialControlJournalTitle incomingMaterialControlJournalTitle;
     /**
      * Верификация закупленной продукции (список результатов процедур входного контроля материалов).
      * Обязательный элемент
      * Список/Set
      */
     @OneToMany
-    private Set<MaterialsOrItemsVerificationRecord> materialsOrItemsVerificationRecords = new HashSet<>();
+    protected Set<MaterialOrItemVerificationInfo> materialOrItemVerificationInfoSet = new HashSet<>();
 }
