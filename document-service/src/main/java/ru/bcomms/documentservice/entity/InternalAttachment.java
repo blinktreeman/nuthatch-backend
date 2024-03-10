@@ -15,7 +15,7 @@ import java.util.UUID;
 @Data
 @Embeddable
 @AttributeOverrides({
-        @AttributeOverride(name = "id", column = @Column(name = "internal_attachment_id")),
+        @AttributeOverride(name = "uuid", column = @Column(name = "internal_attachment_uuid")),
         @AttributeOverride(name = "name", column = @Column(name = "internal_attachment_name")),
         @AttributeOverride(name = "description", column = @Column(name = "internal_attachment_description")),
         @AttributeOverride(name = "checksum", column = @Column(name = "internal_attachment_checksum")),
@@ -29,7 +29,7 @@ public class InternalAttachment {
      * Наложенные ограничения
      * [0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}
      */
-    protected UUID id;
+    protected UUID uuid;
     /**
      * Имя файла.
      * Обязательный элемент

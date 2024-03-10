@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "address.service")
-public class AddressServiceProperties {
-    protected String uri;
+@ConfigurationProperties(prefix = "organization.service")
+public class OrganizationServiceProperties {
+    protected String addressServiceUri;
+    protected String documentServiceUri;
 }

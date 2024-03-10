@@ -57,7 +57,7 @@ public class CustomDocumentService {
 
         InternalAttachment attachment = new InternalAttachment();
         attachment.setName(s3Client.utilities().getUrl(request).toExternalForm());
-        attachment.setId(UUID.randomUUID());
+        attachment.setUuid(UUID.randomUUID());
         attachment.setChecksum(checksum);
 
         return attachment;

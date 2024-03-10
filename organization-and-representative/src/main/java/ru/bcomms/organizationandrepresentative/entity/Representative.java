@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,4 +42,10 @@ public class Representative implements Serializable {
      * Номер специалиста в реестре Нострой
      */
     protected String nostroyNumber;
+    /**
+     * Распорядительный документ, подтверждающий полномочия.
+     * Обязательный элемент
+     * document-service CustomDocument
+     */
+    protected UUID administrativeDocument;
 }

@@ -8,7 +8,7 @@ import ru.bcomms.organizationandrepresentative.dto.AddressResponseDto;
 public abstract class CommonService {
     private final WebClient webClient;
 
-    @Value("${address.service.uri}")
+    @Value("${organization.service.address-service-uri}")
     private String ADDRESS_SERVICE_URI;
 
     public CommonService(WebClient webClient) {
