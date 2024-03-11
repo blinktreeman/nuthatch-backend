@@ -1,5 +1,7 @@
 package ru.bcomms.incomingmaterialcontroljournal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,6 +17,10 @@ import java.util.UUID;
  */
 @Data
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "uuid"
+)
 public class MaterialOrItemVerificationInfo implements Serializable {
     @Id
     @GeneratedValue

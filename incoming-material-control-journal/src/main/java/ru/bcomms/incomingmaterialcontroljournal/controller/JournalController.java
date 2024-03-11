@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.bcomms.incomingmaterialcontroljournal.dto.RepresentativeDto;
 import ru.bcomms.incomingmaterialcontroljournal.entity.IncomingMaterialControlJournal;
+import ru.bcomms.incomingmaterialcontroljournal.entity.MaterialOrItemVerificationInfo;
 import ru.bcomms.incomingmaterialcontroljournal.service.JournalService;
 
 import java.util.UUID;
@@ -39,6 +40,12 @@ public class JournalController {
     @GetMapping(value = "/all-representatives")
     public ResponseEntity<Iterable<RepresentativeDto>> findAllLegalEntities() {
         return new ResponseEntity<>(this.service.findAllRepresentatives(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/verification-infos")
+    public ResponseEntity<Iterable<MaterialOrItemVerificationInfo>> findAllById(
+            @RequestParam(name = "uuid") UUID uuid) {
+        return null;
     }
 
     @PutMapping

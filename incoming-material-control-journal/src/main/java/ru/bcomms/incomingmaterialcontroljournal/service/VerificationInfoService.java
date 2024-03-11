@@ -47,7 +47,12 @@ public class VerificationInfoService {
 
     // CRUD methods
     public MaterialOrItemVerificationInfo save(MaterialOrItemVerificationInfo entity) {
-        return repository.save(entity);
+        MaterialOrItemVerificationInfo savedInfo = repository.save(entity);
+        savedInfo
+                .getIncomingMaterialControlJournal()
+                .getMaterialOrItemVerificationInfoSet()
+                .add(savedInfo);
+        return savedInfo;
     }
 
     public Optional<MaterialOrItemVerificationInfo> findById(UUID uuid) {

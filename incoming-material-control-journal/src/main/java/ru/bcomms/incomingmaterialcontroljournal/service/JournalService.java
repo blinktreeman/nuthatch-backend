@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.bcomms.incomingmaterialcontroljournal.dto.RepresentativeDto;
 import ru.bcomms.incomingmaterialcontroljournal.entity.IncomingMaterialControlJournal;
+import ru.bcomms.incomingmaterialcontroljournal.entity.IncomingMaterialControlJournalTitle;
 import ru.bcomms.incomingmaterialcontroljournal.repository.IncomingMaterialControlJournalRepository;
 
 import java.util.Optional;
