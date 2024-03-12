@@ -20,8 +20,8 @@ import lombok.Data;
 public class Amount {
     @NotNull
     @Column(nullable = false)
-    private String unit;
+    protected String unit;
     @NotNull
     @Column(nullable = false)
-    private Double value;
+    protected Double value;
 }

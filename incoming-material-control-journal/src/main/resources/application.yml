@@ -12,3 +12,7 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+journal:
+  service:
+    document-service-uri: "http://document-service/api/v1/document"
+    organization-service-uri: "http://organization-service/api/v1"

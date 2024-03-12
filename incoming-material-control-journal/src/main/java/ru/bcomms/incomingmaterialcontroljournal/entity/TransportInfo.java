@@ -22,9 +22,9 @@ public class TransportInfo {
     /**
      * Тип транспорта
      */
-    private String transportType;
+    protected String transportType;
     /**
      * Номер
      */
-    private String transportNumber;
+    protected String transportNumber;
 }

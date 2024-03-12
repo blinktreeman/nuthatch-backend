@@ -3,9 +3,6 @@ package ru.bcomms.incomingmaterialcontroljournal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Описание комплексного типа: QualityApproveDocuments.
  * Комплект документов, подтверждающих качество (ДПК), на указанный материал (изделие)
@@ -24,11 +21,11 @@ public class QualityApproveDocuments {
     /**
      * Список нетипизированных ДПК
      */
-    @ManyToMany
-    private Set<UntypedQualityApproveDocument> untypedQualityApproveDocuments = new HashSet<>();
+    @Embedded
+    protected UntypedQualityApproveDocument untypedQualityApproveDocument;
     /**
      * Комплект типизированных ДПК
      */
-    @ManyToMany
-    private Set<TypedQualityApproveDocument> typedQualityApproveDocuments = new HashSet<>();
+    @Embedded
+    protected TypedQualityApproveDocument typedQualityApproveDocuments;
 }

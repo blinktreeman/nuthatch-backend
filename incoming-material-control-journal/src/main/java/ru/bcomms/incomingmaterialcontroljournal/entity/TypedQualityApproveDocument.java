@@ -3,7 +3,6 @@ package ru.bcomms.incomingmaterialcontroljournal.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -11,12 +10,19 @@ import java.util.UUID;
  * Комплект типизированных ДПК
  */
 @Data
-@Entity
-public class TypedQualityApproveDocument implements Serializable {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
-    // document-service DocRequisites UUIDs
+@Embeddable
+@AttributeOverrides({
+        @AttributeOverride(name = "material_amount_quality_document",
+                column = @Column(name = "typed_quality_approve_document_material_amount_quality_document")),
+        @AttributeOverride(name = "parameters_compliance_document",
+                column = @Column(name = "typed_quality_approve_document_parameters_compliance_document")),
+        @AttributeOverride(name = "additional_parameters_compliance_document",
+                column = @Column(name = "typed_quality_approve_document_additional_parameters_compliance_document")),
+        @AttributeOverride(name = "additional_quality_document",
+                column = @Column(name = "typed_quality_approve_document_additional_quality_document")),
+})
+public class TypedQualityApproveDocument {
+    // document-service CustomDocument UUIDs
     /**
      * Документ, подтверждающий качество конкретного количества материала
      * (партии, штуки, комплекта, серии и т.п.).

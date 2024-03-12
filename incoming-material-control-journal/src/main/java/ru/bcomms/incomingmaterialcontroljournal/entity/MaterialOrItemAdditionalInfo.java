@@ -22,14 +22,14 @@ public class MaterialOrItemAdditionalInfo {
      * Масса. Необязательный элемент
      */
     @Embedded
-    private Weight weight;
+    protected Weight weight;
     /**
      * Номер партии. Необязательный элемент
      */
-    private String batchNumber;
+    protected String batchNumber;
     /**
      * Количество. Обязательный элемент
      */
     @Embedded
-    private Amount amount;
+    protected Amount amount;
 }

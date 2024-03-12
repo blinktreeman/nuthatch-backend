@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,31 +13,27 @@ import java.util.UUID;
  * Титульный лист
  */
 @Data
-@Entity
-public class IncomingMaterialControlJournalTitle implements Serializable {
-    @Id
-    @GeneratedValue
-    private UUID uuid;
+@Embeddable
+@AttributeOverrides({
+        @AttributeOverride(name = "permanent_object_info",
+                column = @Column(name = "incoming_material_control_journal_title_permanent_object_info")),
+        @AttributeOverride(name = "organization_and_representative",
+                column = @Column(name = "incoming_material_control_journal_title_organization_and_representative"))
+})
+public class IncomingMaterialControlJournalTitle {
     /**
-     * Id объекта капитального строительства.
-     * Обязательный элемент
-     * Строгий формат:
-     * хххххххх-хххх-хххх-хххх-хххххххххххх
-     * Наложенные ограничения
-     * [0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}
+     * Сведения об объекте строительства
      */
     @NotNull
     @Column(nullable = false)
-    private UUID permanentObjectInfo;
+    // TODO: building-object-service
+    // protected UUID permanentObjectInfo;
+    protected String permanentObjectInfo;
     /**
      * Список организаций и их представителей, выполняющих входной контроль материалов.
      * Обязательный элемент
      * Список/Set
      */
     @ElementCollection(targetClass = UUID.class)
-    @CollectionTable(
-            name = "journal_organization_and_representative",
-            joinColumns = @JoinColumn(name = "journal_uuid")
-    )
-    private Set<UUID> organisationAndRepresentative = new HashSet<>();
+    protected Set<UUID> organizationAndRepresentative = new HashSet<>();
 }
