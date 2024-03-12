@@ -48,7 +48,8 @@ public class MaterialOrItemVerificationInfo implements Serializable {
     /**
      * Поставщик. Обязательный элемент
      */
-    protected UUID supplier;
+    protected String supplier;
+//    protected UUID supplier;
     /**
      * Наименование материала (изделия), его маркировка.
      * Обязательный элемент

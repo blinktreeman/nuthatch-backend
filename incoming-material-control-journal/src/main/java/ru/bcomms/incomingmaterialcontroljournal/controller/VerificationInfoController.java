@@ -3,6 +3,7 @@ package ru.bcomms.incomingmaterialcontroljournal.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.bcomms.incomingmaterialcontroljournal.dto.DocumentResponseDto;
 import ru.bcomms.incomingmaterialcontroljournal.dto.IndividualEntrepreneurDto;
 import ru.bcomms.incomingmaterialcontroljournal.dto.LegalEntityDto;
 import ru.bcomms.incomingmaterialcontroljournal.entity.MaterialOrItemVerificationInfo;
@@ -45,6 +46,11 @@ public class VerificationInfoController {
     @GetMapping(value = "/all-entrepreneurs")
     public ResponseEntity<Iterable<IndividualEntrepreneurDto>> findAllEntrepreneurs() {
         return new ResponseEntity<>(this.service.findAllEntrepreneurs(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all-documents")
+    public ResponseEntity<Iterable<DocumentResponseDto>> findAllDocuments() {
+        return new ResponseEntity<>(this.service.findAllDocuments(), HttpStatus.OK);
     }
 
     @PutMapping

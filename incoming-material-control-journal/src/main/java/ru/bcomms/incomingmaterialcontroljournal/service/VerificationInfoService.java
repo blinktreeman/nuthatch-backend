@@ -3,6 +3,7 @@ package ru.bcomms.incomingmaterialcontroljournal.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import ru.bcomms.incomingmaterialcontroljournal.dto.DocumentResponseDto;
 import ru.bcomms.incomingmaterialcontroljournal.dto.IndividualEntrepreneurDto;
 import ru.bcomms.incomingmaterialcontroljournal.dto.LegalEntityDto;
 import ru.bcomms.incomingmaterialcontroljournal.entity.MaterialOrItemVerificationInfo;
@@ -18,6 +19,9 @@ public class VerificationInfoService {
 
     @Value("${journal.service.organization-service-uri}")
     private String ORGANIZATION_SERVICE_URI;
+
+    @Value("${journal.service.document-service-uri}")
+    private String DOCUMENT_SERVICE_URI;
 
     public VerificationInfoService(MaterialOrItemVerificationInfoRepository repository,
                                    WebClient webClient) {
@@ -41,6 +45,16 @@ public class VerificationInfoService {
                 .uri(ORGANIZATION_SERVICE_URI + "/individual-entrepreneur/all")
                 .retrieve()
                 .bodyToFlux(IndividualEntrepreneurDto.class)
+                .collectList()
+                .block();
+    }
+
+    public Iterable<DocumentResponseDto> findAllDocuments() {
+        return webClient
+                .get()
+                .uri(DOCUMENT_SERVICE_URI + "/all")
+                .retrieve()
+                .bodyToFlux(DocumentResponseDto.class)
                 .collectList()
                 .block();
     }
