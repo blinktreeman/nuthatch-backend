@@ -64,7 +64,7 @@ public class VerificationInfoService {
         MaterialOrItemVerificationInfo savedInfo = repository.save(entity);
         savedInfo
                 .getIncomingMaterialControlJournal()
-                .getMaterialOrItemVerificationInfoSet()
+                .getMaterialOrItemVerificationInfoList()
                 .add(savedInfo);
         return savedInfo;
     }

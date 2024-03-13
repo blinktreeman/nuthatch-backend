@@ -17,6 +17,7 @@ import java.util.UUID;
  */
 @Data
 @Entity
+@Table(name = "material_or_item_verification_info")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "uuid"
@@ -30,6 +31,7 @@ public class MaterialOrItemVerificationInfo implements Serializable {
      * о верификации
      */
     @ManyToOne
+    @JoinColumn(name = "incoming_material_control_journal_uuid")
     protected IncomingMaterialControlJournal incomingMaterialControlJournal;
     /**
      * Дата поступления.
