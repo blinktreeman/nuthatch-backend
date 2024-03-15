@@ -6,9 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Описание комплексного типа: IncomingMaterialControlJournal.
@@ -16,7 +14,7 @@ import java.util.UUID;
  */
 @Data
 @Entity
-@Table(name = "journal")
+@Table(name = "incoming_material_control_journal")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "uuid"
@@ -36,6 +34,6 @@ public class IncomingMaterialControlJournal implements Serializable {
      * Обязательный элемент
      * Список/Set
      */
-    @OneToMany(mappedBy = "incomingMaterialControlJournal", cascade = CascadeType.ALL)
-    protected Set<MaterialOrItemVerificationInfo> materialOrItemVerificationInfoSet = new HashSet<>();
+    @OneToMany(mappedBy = "incomingMaterialControlJournal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    protected List<MaterialOrItemVerificationInfo> materialOrItemVerificationInfoList = new ArrayList<>();
 }

@@ -8,10 +8,16 @@ spring:
     username: user
     password: secretPassword
     driver-class-name: org.h2.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "https://kc.letsdigit.ru/realms/nuthatch/protocol/openid-connect/certs"
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+
 journal:
   service:
     document-service-uri: "http://document-service/api/v1/document"

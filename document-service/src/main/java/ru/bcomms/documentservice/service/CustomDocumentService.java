@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.bcomms.documentservice.configuration.DocumentServiceProperties;
 import ru.bcomms.documentservice.dto.CustomDocumentDto;
 import ru.bcomms.documentservice.entity.CustomDocument;
 import ru.bcomms.documentservice.entity.InternalAttachment;
@@ -24,39 +25,43 @@ public class CustomDocumentService {
     private final CustomDocumentRepository repository;
     private final ModelMapper modelMapper;
     private final S3Client s3Client;
-    private final String BUCKET = "bcomms-01";
+    private final DocumentServiceProperties documentServiceProperties;
 
     @Autowired
     public CustomDocumentService(CustomDocumentRepository repository,
                                  ModelMapper modelMapper,
-                                 S3Client s3Client) {
+                                 S3Client s3Client,
+                                 DocumentServiceProperties documentServiceProperties) {
         this.repository = repository;
         this.modelMapper = modelMapper;
         this.s3Client = s3Client;
+        this.documentServiceProperties = documentServiceProperties;
     }
 
     public InternalAttachment upload(MultipartFile file) throws IOException {
-        String keyName = file.getOriginalFilename();
 
+        String BUCKET = documentServiceProperties.getAwsBucket();
+
+        String keyName = file.getOriginalFilename();
         byte[] data = file.getBytes();
         // File CRC32 checksum
         Checksum crc32 = new CRC32();
         crc32.update(data, 0, data.length);
         String checksum = String.valueOf(crc32.getValue());
         // Upload file
-        s3Client
-                .putObject(PutObjectRequest
-                                .builder()
-                                .bucket(BUCKET)
-                                .key(keyName)
-                                .checksumCRC32(checksum)
-                                .build(),
-                        RequestBody.fromBytes(data));
+        s3Client.putObject(PutObjectRequest
+                        .builder()
+                        .bucket(BUCKET)
+                        .key(keyName)
+                        .checksumCRC32(checksum)
+                        .build(),
+                RequestBody.fromBytes(data));
+
         // Get uploaded file attr
         GetUrlRequest request = GetUrlRequest.builder().bucket(BUCKET).key(keyName).build();
-
         InternalAttachment attachment = new InternalAttachment();
         attachment.setName(s3Client.utilities().getUrl(request).toExternalForm());
+
         attachment.setUuid(UUID.randomUUID());
         attachment.setChecksum(checksum);
 

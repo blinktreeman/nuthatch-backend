@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Описание комплексного типа: IncomingMaterialControlJournalTitle.
@@ -35,5 +33,5 @@ public class IncomingMaterialControlJournalTitle {
      * Список/Set
      */
     @ElementCollection(targetClass = UUID.class)
-    protected Set<UUID> organizationAndRepresentative = new HashSet<>();
+    protected List<UUID> organizationAndRepresentative = new ArrayList<>();
 }

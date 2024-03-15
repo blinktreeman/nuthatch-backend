@@ -14,3 +14,11 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+
+document:
+  service:
+    aws-access-key-id: "YCAJEdGhfjXUkWvRP_6yuxham"
+    aws-secret-access-key: "YCPCi5u-xfSGO-QdW0kemwH0ZjpKQ_4O9nfY9jjX"
+    aws-region: "ru-central1"
+    aws-uri: "https://storage.yandexcloud.net"
+    aws-bucket: "bcomms-01"
