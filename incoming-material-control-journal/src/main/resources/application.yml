@@ -13,6 +13,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: "https://kc.letsdigit.ru/realms/nuthatch/protocol/openid-connect/certs"
+          issuer-uri: "https://kc.letsdigit.ru/realms/nuthatch"
+
 eureka:
   client:
     service-url:

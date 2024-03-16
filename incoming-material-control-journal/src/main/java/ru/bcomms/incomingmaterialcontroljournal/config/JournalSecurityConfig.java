@@ -2,6 +2,7 @@ package ru.bcomms.incomingmaterialcontroljournal.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -13,7 +14,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
+@EnableMethodSecurity
 public class JournalSecurityConfig {
 
     @Bean
@@ -23,9 +25,9 @@ public class JournalSecurityConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakJWTRolesConverter());
 
         http.authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/api/v1/journal/**")
-                        .permitAll()
-                        .anyRequest()
+                        .requestMatchers("/api/v1/journal/**")
+//                        .permitAll()
+//                        .anyRequest()
                         .authenticated())
                 .oauth2ResourceServer((oauth2) ->
                         oauth2.jwt(jwtConfigurer ->
@@ -33,7 +35,7 @@ public class JournalSecurityConfig {
                         ))
                 .csrf((csrf) -> csrf.ignoringRequestMatchers("/api/v1/journal/**"))
                 .cors((cors) -> cors.configurationSource(corsConfigurationSource())
-        );
+                );
 
         return http.build();
     }
