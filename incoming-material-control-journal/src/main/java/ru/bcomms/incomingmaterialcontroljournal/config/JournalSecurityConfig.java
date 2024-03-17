@@ -14,7 +14,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 @EnableMethodSecurity
 public class JournalSecurityConfig {
 
@@ -24,11 +24,8 @@ public class JournalSecurityConfig {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakJWTRolesConverter());
 
-        http.authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/v1/journal/**")
-//                        .permitAll()
-//                        .anyRequest()
-                        .authenticated())
+        http
+                .authorizeHttpRequests((auth) -> auth.anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) ->
                         oauth2.jwt(jwtConfigurer ->
                                 jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter)

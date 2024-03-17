@@ -3,6 +3,8 @@ package ru.bcomms.incomingmaterialcontroljournal.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import ru.bcomms.incomingmaterialcontroljournal.dto.RepresentativeDto;
 import ru.bcomms.incomingmaterialcontroljournal.entity.IncomingMaterialControlJournal;
@@ -21,7 +23,7 @@ public class JournalController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('technical-department-engineer')")
+    @PreAuthorize("hasAuthority('ROLE_realm_technical-department-engineer')")
     public ResponseEntity<IncomingMaterialControlJournal> save(
             @RequestBody IncomingMaterialControlJournal entity) {
         return new ResponseEntity<>(service.save(entity), HttpStatus.CREATED);
@@ -51,21 +53,21 @@ public class JournalController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('technical-department-engineer')")
+    @PreAuthorize("hasAuthority('ROLE_realm_technical-department-engineer')")
     public ResponseEntity<IncomingMaterialControlJournal> update(
             @RequestBody IncomingMaterialControlJournal entity) {
         return new ResponseEntity<>(service.update(entity), HttpStatus.OK);
     }
 
     @DeleteMapping
-    @PreAuthorize("hasAuthority('technical-department-engineer')")
+    @PreAuthorize("hasAuthority('ROLE_realm_technical-department-engineer')")
     public ResponseEntity<HttpStatus> deleteById(@RequestParam UUID uuid) {
         service.deleteById(uuid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/all")
-    @PreAuthorize("hasAuthority('technical-department-engineer')")
+    @PreAuthorize("hasAuthority('ROLE_realm_technical-department-engineer')")
     public ResponseEntity<HttpStatus> deleteAll() {
         service.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
