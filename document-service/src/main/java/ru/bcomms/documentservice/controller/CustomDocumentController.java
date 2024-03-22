@@ -13,6 +13,7 @@ import ru.bcomms.documentservice.service.CustomDocumentService;
 import java.io.IOException;
 import java.util.UUID;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1/document")
 public class CustomDocumentController {

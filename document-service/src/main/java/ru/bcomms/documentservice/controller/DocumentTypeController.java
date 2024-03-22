@@ -9,6 +9,7 @@ import ru.bcomms.documentservice.service.DocumentTypeService;
 
 import java.util.UUID;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1/document-type")
 public class DocumentTypeController {

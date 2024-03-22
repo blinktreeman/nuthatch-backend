@@ -11,21 +11,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class KeycloakJWTRolesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
-    // Prefix used for realm level roles.
+    // Префикс будет использован для выделения роле уровня realm
     public static final String PREFIX_REALM_ROLE = "ROLE_realm_";
-    // Prefix used in combination with the resource (client) name for resource level roles.
+    // Префикс будет использован для выделения роле уровня клиента
     public static final String PREFIX_RESOURCE_ROLE = "ROLE_";
-    // Name of the claim containing the realm level roles
+    // Имя claim содержащего роли уровня realm
     private static final String CLAIM_REALM_ACCESS = "realm_access";
-    // Name of the claim containing the resources (clients) the user has access to.
+    // Имя claim содержащего роли уровня клиента
     private static final String CLAIM_RESOURCE_ACCESS = "resource_access";
-    // Name of the claim containing roles. (Applicable to realm and resource level.)
+    // Имя claim содержащего роли применимые к уровню realm и клиента
     private static final String CLAIM_ROLES = "roles";
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        // Realm roles
-        // Get the part of the access token that holds the roles assigned on realm level
+        // Роли уровня realm
+        // выделяем роли уровня realm
         Map<String, Collection<String>> realmAccess = jwt.getClaim(CLAIM_REALM_ACCESS);
         if (realmAccess != null && !realmAccess.isEmpty()) {
             Collection<String> roles = realmAccess.get(CLAIM_ROLES);
@@ -36,9 +36,8 @@ public class KeycloakJWTRolesConverter implements Converter<Jwt, Collection<Gran
                 grantedAuthorities.addAll(realmRoles);
             }
         }
-        // Resource (client) roles
-        // A user might have access to multiple resources all containing their own roles.
-        // Therefore, it is a map of resource each possibly containing a "roles" property
+        // Роли уровня клиента
+        // выделяем роли уровня клиента
         Map<String, Map<String, Collection<String>>> resourceAccess = jwt.getClaim(CLAIM_RESOURCE_ACCESS);
         if (resourceAccess != null && !resourceAccess.isEmpty()) {
             resourceAccess.forEach((resource, resourceClaims) -> {
