@@ -4,11 +4,15 @@ server:
 spring:
   application:
     name: document-service
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
   datasource:
-    url: jdbc:h2:mem:nuthatch_db
+    url: jdbc:postgresql://localhost:5432/nuthatch_db
     username: user
-    password: secretPassword
-    driver-class-name: org.h2.Driver
+    password: password
+    driver-class-name: org.postgresql.Driver
 
 eureka:
   client:
@@ -17,8 +21,8 @@ eureka:
 
 document:
   service:
-    aws-access-key-id: "YCAJEdGhfjXUkWvRP_6yuxham"
-    aws-secret-access-key: "YCPCi5u-xfSGO-QdW0kemwH0ZjpKQ_4O9nfY9jjX"
-    aws-region: "ru-central1"
-    aws-uri: "https://storage.yandexcloud.net"
-    aws-bucket: "bcomms-01"
+    aws-access-key-id: accessKeyId
+    aws-secret-access-key: secretAccessKey
+    aws-region: ru-central1
+    aws-uri: https://storage.yandexcloud.net
+    aws-bucket: awsBucket
