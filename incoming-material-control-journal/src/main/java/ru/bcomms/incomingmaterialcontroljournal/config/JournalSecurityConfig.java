@@ -25,6 +25,11 @@ public class JournalSecurityConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakJWTRolesConverter());
 
         http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/v3/api-docs",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/webjars/**").permitAll())
                 .authorizeHttpRequests((auth) -> auth.anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) ->
                         oauth2.jwt(jwtConfigurer ->
@@ -41,7 +46,7 @@ public class JournalSecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://nuthatch.bcomms.ru", "http://5.181.108.17"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

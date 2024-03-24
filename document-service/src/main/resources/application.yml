@@ -14,11 +14,16 @@ spring:
     password: password
     driver-class-name: org.postgresql.Driver
 
+# Discovery service client
 eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.16.0.5
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
 
+# Yandex Cloud env
 document:
   service:
     aws-access-key-id: accessKeyId
@@ -26,3 +31,8 @@ document:
     aws-region: ru-central1
     aws-uri: https://storage.yandexcloud.net
     aws-bucket: awsBucket
+
+# OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs

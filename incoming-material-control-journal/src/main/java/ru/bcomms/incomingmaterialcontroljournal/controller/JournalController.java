@@ -13,6 +13,7 @@ import ru.bcomms.incomingmaterialcontroljournal.service.JournalService;
 
 import java.util.UUID;
 
+//@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1/journal")
 public class JournalController {
