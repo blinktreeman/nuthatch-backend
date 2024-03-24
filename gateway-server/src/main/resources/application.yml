@@ -15,7 +15,7 @@ spring:
         cors-configurations:
           '[/**]':
             allowCredentials: true
-            allowedOrigins: "*"
+            allowedOrigins: "http://nuthatch.bcomms.ru"
             allowedMethods:
               - GET
               - POST
