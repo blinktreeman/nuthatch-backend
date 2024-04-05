@@ -17,9 +17,9 @@
         <option value="$PROJECT_DIR$/organization-and-representative/pom.xml" />
         <option value="$PROJECT_DIR$/incoming-material-control-journal/pom.xml" />
         <option value="$PROJECT_DIR$/document-service/pom.xml" />
+        <option value="$PROJECT_DIR$/building-project/pom.xml" />
       </list>
     </option>
-    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

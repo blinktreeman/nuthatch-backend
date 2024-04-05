@@ -1,18 +1,23 @@
 server:
   port: 8085
-
 spring:
   application:
-    name: document-service
+    name: project-service
   jpa:
     database: postgresql
     hibernate:
       ddl-auto: update
   datasource:
     url: jdbc:postgresql://localhost:5432/nuthatch_db
-    username: user
-    password: password
+    username: nuthatch-user
+    password: secretPassword
     driver-class-name: org.postgresql.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "https://kc.letsdigit.ru/realms/nuthatch/protocol/openid-connect/certs"
+          issuer-uri: "https://kc.letsdigit.ru/realms/nuthatch"
 
 # Discovery service client
 eureka:
@@ -21,17 +26,3 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-
-# Yandex Cloud env
-document:
-  service:
-    aws-access-key-id: accessKeyId
-    aws-secret-access-key: secretAccessKey
-    aws-region: ru-central1
-    aws-uri: https://storage.yandexcloud.net
-    aws-bucket: awsBucket
-
-# OpenAPI
-springdoc:
-  api-docs:
-    path: /api-docs
